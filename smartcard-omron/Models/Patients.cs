@@ -9,31 +9,28 @@ namespace smartcard_omron.Models
   public  class Patients
     {
 
-        public string IDCard { get; set; }
-        public string Th_prefix { get; set; }
-        public string Th_firstname { get; set; }
-        public string Th_lastname { get; set; }
-        public string Th_midlename { get; set; }
 
-        public string En_prefix { get; set; }
-        public string En_firstname { get; set; }
-        public string En_lastname { get; set; }
-        public string En_midlename { get; set; }
-
-        public DateTime DateOfbrith { get; set; }
-        public string Gender { get; set; }
-        public string Houseno { get; set; }   
-        public string Valaigeno { get; set; }  
-        public string Lane { get; set; }  
-        public string Road { get; set; }
-        public string Subdistrict { get; set; }
-        public string District { get; set; }  
-        public string Province { get; set; }  
-                                             
-        public DateTime Issuedate { get; set; } 
-                                                 
-        public DateTime Expire { get; set; }  // วันหมดอายุ
-        public string Issure { get; set; }  //สถานที่ออกบัตร
+        public static string IDCard { get; set; }
+        public static string Th_prefix { get; set; }
+        public static string Th_firstname { get; set; }
+        public static string Th_lastname { get; set; }
+        public static string Th_midlename { get; set; }
+        public static string En_prefix { get; set; }
+        public static string En_firstname { get; set; }
+        public static string En_lastname { get; set; }
+        public static string En_midlename { get; set; }
+        public static string DateOfbrith { get; set; }
+        public static string Gender { get; set; }
+        public static string Houseno { get; set; }
+        public static string Valaigeno { get; set; }
+        public static string Lane { get; set; }
+        public static string Road { get; set; }
+        public static string Subdistrict { get; set; }
+        public static string District { get; set; }
+        public static string Province { get; set; }
+        public static string Issuedate { get; set; }
+        public static string Expire { get; set; }  // วันหมดอายุ
+        public static string Issure { get; set; }  //สถานที่ออกบัตร
 
 
     }

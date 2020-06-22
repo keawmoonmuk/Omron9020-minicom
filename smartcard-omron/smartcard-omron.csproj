@@ -99,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextFactory.cs" />
+    <Compile Include="InsertSmartCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InsertSmartCard.Designer.cs">
+      <DependentUpon>InsertSmartCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Metro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,15 @@
     <Compile Include="Models\Patients.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOmron9020.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReadOmron9020.Designer.cs">
+      <DependentUpon>ReadOmron9020.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="InsertSmartCard.resx">
+      <DependentUpon>InsertSmartCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Metro.resx">
       <DependentUpon>Metro.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +137,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReadOmron9020.resx">
+      <DependentUpon>ReadOmron9020.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -153,6 +171,8 @@
   <ItemGroup>
     <Content Include="assets\bg.jpg" />
     <Content Include="assets\bg1.jpg" />
+    <None Include="assets\img\insertsmartcard.jpg" />
+    <None Include="assets\img\bp320.jpg" />
     <Content Include="MetroFramework.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

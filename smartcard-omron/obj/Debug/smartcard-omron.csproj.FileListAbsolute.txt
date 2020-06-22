@@ -23,3 +23,5 @@ D:\smartcard-omron\smartcard-omron\bin\Debug\smartcard_omron.pdb
 D:\smartcard-omron\smartcard-omron\obj\Debug\smartcard_omron.exe
 D:\smartcard-omron\smartcard-omron\obj\Debug\smartcard_omron.pdb
 D:\smartcard-omron\smartcard-omron\obj\Debug\smartcard-omron.csprojAssemblyReference.cache
+D:\smartcard-omron\smartcard-omron\obj\Debug\smartcard_omron.InsertSmartCard.resources
+D:\smartcard-omron\smartcard-omron\obj\Debug\smartcard_omron.ReadOmron9020.resources

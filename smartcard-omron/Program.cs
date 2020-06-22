@@ -16,7 +16,7 @@ namespace smartcard_omron
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Metro());
+            Application.Run(new InsertSmartCard());
         }
     }
 }
