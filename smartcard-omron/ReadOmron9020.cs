@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,11 @@ namespace smartcard_omron
         public Data data = new Data();  //import Class Data
         static bool _continue;
         static SerialPort _serialport;
+
+        //log      
+        private string msg = "";
+        private string error = "";
+        string directory_root = @"C:\LOG";
 
         public ReadOmron9020()
         {
@@ -34,6 +40,8 @@ namespace smartcard_omron
                 string idc = Patients.IDCard;
                 Console.WriteLine(idc);
                 ReaddataOmron9020();
+
+
             }
             else
             {
@@ -71,6 +79,7 @@ namespace smartcard_omron
                     while (_continue)
                     {
                         bytes.Clear();
+
 
                         while (true)
                         {
@@ -135,7 +144,7 @@ namespace smartcard_omron
                                 string dia = dia_d.ToString() + dia_i.ToString() + dia_a.ToString();
                                 string pr = pr_p.ToString() + pr_r.ToString() + pr_pr.ToString();
 
-                                string timenow = time_1.ToString() + time_2.ToString() + ":" + time_3.ToString() + time_4.ToString() + time_5.ToString();
+                                string timenow = time_1.ToString() + time_2.ToString() + time_3.ToString() + time_4.ToString() + time_5.ToString();
 
                                 string datetime_now = dateformat + " " + timenow;
 
@@ -143,8 +152,10 @@ namespace smartcard_omron
                                 Data.Map = map;
                                 Data.Dia = dia;
                                 Data.Pr = pr;
-                                Data.Datetime = datetime_now;                        
+                                Data.Datetime = datetime_now;
 
+                                msg = "Read data form serialport suecess...";
+                                LogMessage();
                             }
                             if (bytes.Count == 58 || bytes.Count == 59) break;
                         }
@@ -157,9 +168,40 @@ namespace smartcard_omron
             }
             catch (Exception ex)
             {
+                error = "Not connect Serialport.... ";
+                LogMessageError();
                 Console.WriteLine("Not connection serial port", ex);
 
             }
+        }
+
+
+        //log complete
+        public void LogMessage()
+        {
+
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+
+            }
+
+            StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+            stw.WriteLine($"TIME COMPLETE : {DateTime.Now} MESSAGE : {msg} -- Data Patient : {Patients.Th_firstname} - {Patients.Th_lastname}, {Patients.IDCard} {Patients.Gender} {Patients.DateOfbrith} DATA BP-9020 {Data.Sys}-{Data.Dia}- {Data.Map}- {Data.Pr} ");
+            stw.Close();
+
+        }
+
+        //log error
+        public void LogMessageError()
+        {
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+            }
+            StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+            stw.WriteLine($"TIME ERROR : {DateTime.Now}  Error Message : {error} ");
+            stw.Close();
         }
     }
 }

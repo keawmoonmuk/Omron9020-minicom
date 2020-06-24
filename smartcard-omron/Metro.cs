@@ -25,7 +25,12 @@ namespace smartcard_omron
 
         //static bool _continue;
         //static SerialPort _serialport;
-       
+        //log      
+        private string msg = "";
+        private string error = "";
+        string directory_root = @"C:\LOG";
+
+
         public Metro()
         {
             InitializeComponent();
@@ -56,6 +61,8 @@ namespace smartcard_omron
                 }
                 catch
                 {
+                    msg = "when not insert smart card return to Insertsmart Defualt";
+                    
                     InsertSmartCard forminsertsmart = new InsertSmartCard();
                     forminsertsmart.Show();
                     timer_checksmartcard.Stop();
@@ -99,12 +106,15 @@ namespace smartcard_omron
             metroTxt_dia.Text = Data.Dia;
             metroTxt_pr.Text = Data.Pr;
       
-            metroTxt_datetime.Text = datetimenow;
+            metroTxt_datetime.Text = Data.Datetime;
 
             metroTxt_status.Text = "การวัดเสร็จสิ้น กรุณาดึงบัตรประชาชนออก";
             metroTxt_status.BackColor = Color.GreenYellow;
             metroTxt_status.ForeColor = Color.Black;
             metroTxt_status.Font = new Font("Arial", 62, FontStyle.Bold);
+
+            msg = "Read data to form result suecess ...";
+            LogMessage();
 
         }
 
@@ -157,6 +167,32 @@ namespace smartcard_omron
             }
         }
 
+        //log complete
+        public void LogMessage()
+        {
 
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+
+            }
+
+            StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+            stw.WriteLine($"TIME COMPLETE : {DateTime.Now}  MESSAGE : {msg} -- Data Patient : {Patients.Th_firstname} - {Patients.Th_lastname}, {Patients.IDCard} {Patients.Gender} {Patients.DateOfbrith} DATA BP-9020 {Data.Sys}-{Data.Dia}- {Data.Map}- {Data.Pr} ");
+            stw.Close();
+
+        }
+
+        //log error
+        public void LogMessageError()
+        {
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+            }
+            StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+            stw.WriteLine($"TIME ERROR : {DateTime.Now}  Error Message : {error} ");
+            stw.Close();
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThaiNationalIDCard.NET;
 using ThaiNationalIDCard.NET.Models;
+using System.IO;
 
 namespace smartcard_omron
 {
@@ -19,16 +20,25 @@ namespace smartcard_omron
         //import libraly thaination idcard
         public static ThaiNationalIDCardReader cardReader;
         public static PersonalPhoto personalPhoto;
+
+        //log      
+        private string msg = "";
+        private string error = "";
+        string directory_root = @"C:\LOG";
+
         public InsertSmartCard()
         {
             InitializeComponent();
 
             //start timer 
             timer_checkReadsmartcard.Start();
+
+           
         }
 
         //timer read smartcard
         private void timer_checkReadsmartcard_Tick(object sender, EventArgs e)
+        
         {
             while (true)
             {
@@ -52,9 +62,15 @@ namespace smartcard_omron
                     }
 
                     Readsmartcard(personalPhoto);
+                    msg = " Read smartcard suecess ....";
+                    LogMessage();  //log file
                 }
                 catch(Exception ex)
                 {
+                    error = "Id card not inserted ";
+                  
+                    LogMessageError();
+
                     Console.WriteLine("Not insert smartcard reader...", ex);
                 }
             }
@@ -136,10 +152,40 @@ namespace smartcard_omron
 
         }
 
+        //formate date 
         private string Formatdate(DateTime date)
         {
             string date_formate = date.ToString("dd/MM/yyyy", new CultureInfo("th-TH"));
             return date_formate;
         }
+
+        //log complete
+        public void LogMessage()
+        {
+          
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+
+            }
+
+            StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+            stw.WriteLine($"TIME COMPLETE : {DateTime.Now}-- MESSAGE : {msg} -- Data Patient : {Patients.Th_firstname} - {Patients.Th_lastname}, {Patients.IDCard} {Patients.Gender} {Patients.DateOfbrith} ");
+            stw.Close();
+
+        }
+
+        //log error
+        public void LogMessageError()
+        {
+            if (!Directory.Exists(directory_root))
+            {
+                Directory.CreateDirectory(directory_root);
+            }
+                StreamWriter stw = new StreamWriter(@"C:\Log\log.txt", true);
+                stw.WriteLine($"TIME ERROR : {DateTime.Now}  Error Message : {error} ");
+                stw.Close();            
+        }
+
     }
 }
