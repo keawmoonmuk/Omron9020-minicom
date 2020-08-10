@@ -21,7 +21,7 @@ namespace smartcard_omron
         public static ThaiNationalIDCardReader cardReader;
         public static PersonalPhoto personalPhoto;
 
-        //log      
+        //==============log======================
         private string msg = "";
         private string error = "";
         string directory_root = @"C:\LOG";
@@ -159,7 +159,7 @@ namespace smartcard_omron
             return date_formate;
         }
 
-        //log complete
+        //=============log complete===================
         public void LogMessage()
         {
           
@@ -175,7 +175,7 @@ namespace smartcard_omron
 
         }
 
-        //log error
+        //==================log error=========================
         public void LogMessageError()
         {
             if (!Directory.Exists(directory_root))

@@ -41,7 +41,6 @@ namespace smartcard_omron
                 Console.WriteLine(idc);
                 ReaddataOmron9020();
 
-
             }
             else
             {
@@ -61,7 +60,7 @@ namespace smartcard_omron
             {
                 //connect serial port  
                 _serialport = new SerialPort();
-                _serialport = new SerialPort("COM3", 2400, Parity.Even, 8, StopBits.One);
+                _serialport = new SerialPort("COM2", 2400, Parity.Even, 8, StopBits.One);
 
                 // Set the read/write timeouts  
                 _serialport.ReadTimeout = 500;
@@ -73,7 +72,8 @@ namespace smartcard_omron
                     _continue = true;
 
                     Console.WriteLine("Wait data....");
-
+                    msg = "Wait data form inbody 320.....";
+                    LogMessage();
                     List<byte> bytes = new List<byte>();
 
                     while (_continue)

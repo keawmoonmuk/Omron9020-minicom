@@ -30,6 +30,7 @@ namespace smartcard_omron
         private string error = "";
         string directory_root = @"C:\LOG";
 
+        private int i = 0;
 
         public Metro()
         {
@@ -50,8 +51,10 @@ namespace smartcard_omron
                     cardReader = new ThaiNationalIDCardReader();  // new method
                     personalPhoto = cardReader.GetPersonalPhoto();
 
+                    if (i == 1) return;
                     if (personalPhoto.CitizenID == Patients.IDCard)
                     {
+
                         Readdata_result();
 
                         //call api
@@ -77,6 +80,8 @@ namespace smartcard_omron
         //-------------form result all-----------------------
         private void Readdata_result()
         {
+            i++;
+
             Refresh();
             string datetimenow = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
 
